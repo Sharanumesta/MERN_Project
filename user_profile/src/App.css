@@ -1,0 +1,31 @@
+/* autoprefixer grid: autoplace */
+
+.App{
+  font-family: sans-serif;
+}
+.background {
+  background-color: #3a566e ;
+}
+input{
+  background-color:aquamarine;
+  color: aqua;
+}
+
+.password-toggle-container {
+  position: relative;
+}
+
+.password-input {
+  padding-right: 40px;
+}
+
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  transform: translate(35%,-100%);
+  cursor: pointer;
+}
+
+.login_icon{
+  transform: translate(35%,-150%);
+}

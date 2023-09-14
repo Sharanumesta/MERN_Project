@@ -18,7 +18,7 @@ const Login = () => {
   });
 
   const navigate = useNavigate();
-  const [error,setError] = useState('')
+  // const [error,setError] = useState('')
 
   const handleSubmit = async (values) => {
     try {

@@ -2,7 +2,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { Formik } from 'formik'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
@@ -17,8 +17,15 @@ const Login = () => {
     password : yup.string().required('Enter yor Password')
   });
 
+  const token = localStorage.getItem('token');
   const navigate = useNavigate();
-  // const [error,setError] = useState('')
+  const [error,setError] = useState('')
+
+  useEffect(()=>{
+    if(token){
+      navigate('/profile');
+    }
+  },[token,navigate]);
 
   const handleSubmit = async (values) => {
     try {

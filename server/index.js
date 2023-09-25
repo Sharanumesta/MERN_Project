@@ -85,12 +85,12 @@ server.post('/login', (req, res, next) => {
 });
 
 server.get('/profile', async (req, res) => {
-  const token = req.body.headers['Authorization'];
+  const token = req.headers['Authorization'];
   try {
     const decode = jwt.verify(token, 'mestashara');
     const email = decode.email
     const user = await User.findOne({ email: email });
-
+    console.log(user);
     return res.json({ user });
   } catch (error) {
     

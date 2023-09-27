@@ -43,7 +43,8 @@ const Registration = () => {
 
   const handleSubmit = async (values) => {
     try {
-      await axios.post("http://localhost:8080/", values).then((res) => {
+      await axios.post("http://localhost:8080/", values)
+      .then((res) => {
         if (res.status === 400) {
           alert("User already exist please Login!");
         } else if (res.status === 200) {

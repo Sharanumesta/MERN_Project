@@ -1,85 +1,147 @@
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import axios from 'axios';
-import { Formik } from 'formik'
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import * as yup from 'yup';
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import { Formik } from "formik";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
 
 const Login = () => {
   const initialValues = {
-    email : '',
-    password : ''
-  }
+    email: "",
+    password: "",
+  };
 
   const loginSchema = yup.object().shape({
-    email : yup.string().email().required('Enter your Email'),
-    password : yup.string().required('Enter yor Password')
+    email: yup
+      .string()
+      .email()
+      .required("Enter your Email"),
+    password: yup.string().required("Enter yor Password"),
   });
 
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const [error,setError] = useState('')
+  const [error, setError] = useState("");
 
-  useEffect(()=>{
-    if(token){
-      navigate('/profile');
+  useEffect(() => {
+    if (token) {
+      navigate("/profile");
     }
-  },[token,navigate]);
+  }, [token, navigate]);
 
   const handleSubmit = async (values) => {
     try {
-      await axios.post('http://localhost:8080/login',values)
-      .then(res =>{
+      await axios.post("http://localhost:8080/login", values).then((res) => {
         const { message, token } = res.data;
-         if (message === 'Login successful'){
-          localStorage.setItem('token', token);
-          alert('Login Successful');
-          navigate('/profile');
-        }else if(message === 'Unauthorized'){
-          setError('Enter correct email or password');
+        if (message === "Login successful") {
+          localStorage.setItem("token", token);
+          alert("Login Successful");
+          navigate("/profile");
+        } else if (message === "Unauthorized") {
+          setError("Enter correct email or password");
         }
-      })
+      });
     } catch (error) {
-      console.log(error.response.data); 
+      console.log(error.response.data);
     }
-  }
+  };
 
   const [icon, setIcon] = useState(faEyeSlash);
-  const [type, setType] = useState('password');
+  const [type, setType] = useState("password");
   const passwordToggle = () => {
-    if(type === 'password'){
+    if (type === "password") {
       setIcon(faEye);
-      setType('text');
-    }else{
+      setType("text");
+    } else {
       setIcon(faEyeSlash);
-      setType('password');
+      setType("password");
     }
-  }
+  };
 
   return (
     <>
-      <div className='background'>
-        <div className='container d-flex justify-content-center align-items-center vh-100'>
-          <div className='row w-75'>
-            <div className='col-md-6 mx-auto border-0 shadow-lg bg-white rounded-3'>
-              <Formik initialValues={initialValues} validationSchema={loginSchema} onSubmit={handleSubmit}>
-                {({ values, errors, handleSubmit, handleChange, handleBlur}) => (
-                  <form className='mx-auto' onSubmit={handleSubmit}>
-                    <div className='h3 text-uppercase text-success py-4 text-center'>Welcome Back</div>
-                      <div className='pb-3 px-5 row'>
-                          <input className='form-control' type='email' name='email' autoComplete='off' placeholder='Email' value={values.email} onChange={handleChange} onBlur={handleBlur} />
-                          {errors.email && <div className='text-danger' style={{fontSize :'0.75rem'}}>{errors.email}</div>}
+      <div className="background">
+        <div className="container d-flex justify-content-center align-items-center vh-100">
+          <div className="row w-75">
+            <div className="col-md-6 mx-auto border-0 shadow-lg bg-white rounded-3">
+              <Formik
+                initialValues={initialValues}
+                validationSchema={loginSchema}
+                onSubmit={handleSubmit}
+              >
+                {({
+                  values,
+                  errors,
+                  handleSubmit,
+                  handleChange,
+                  handleBlur,
+                }) => (
+                  <form className="mx-auto" onSubmit={handleSubmit}>
+                    <div className="h3 text-uppercase text-success py-4 text-center">
+                      Welcome Back
+                    </div>
+                    <div className="pb-3 px-5 row">
+                      <input
+                        className="form-control"
+                        type="email"
+                        name="email"
+                        autoComplete="off"
+                        placeholder="Email"
+                        value={values.email}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.email && (
+                        <div
+                          className="text-danger"
+                          style={{ fontSize: "0.75rem" }}
+                        >
+                          {errors.email}
+                        </div>
+                      )}
+                    </div>
+                    <div className="pb-3 px-5 row password-toggle-icon">
+                      <input
+                        className="form-control"
+                        type={type}
+                        name="password"
+                        autoComplete="off"
+                        placeholder="Password"
+                        value={values.Password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      {errors.password && (
+                        <div
+                          className="text-danger"
+                          style={{ fontSize: "0.75rem" }}
+                        >
+                          {errors.password}
+                        </div>
+                      )}
+                      <FontAwesomeIcon
+                        onClick={passwordToggle}
+                        icon={icon}
+                        className="login_icon"
+                      />
+                    </div>
+                    {error && (
+                      <div
+                        className="text-danger text-center"
+                        style={{ fontSize: "0.75rem" }}
+                      >
+                        {error}
                       </div>
-                      <div className='pb-3 px-5 row password-toggle-icon'>
-                          <input className='form-control' type ={type} name='password' autoComplete='off' placeholder='Password' value={values.Password} onChange={handleChange} onBlur={handleBlur} />
-                          {errors.password && <div className='text-danger' style={{fontSize :'0.75rem'}}>{errors.password}</div>}
-                          <FontAwesomeIcon onClick={passwordToggle} icon={icon} className='login_icon' />
-                      </div>
-                        { error && <div className='text-danger text-center' style={{fontSize :'0.75rem'}}>{error}</div> }
-                      <div className='text-center pt-3 pb-5'>
-                        <button type='submit' className='input-button btn btn-primary'>Login</button>
-                      </div>
+                    )}
+                    <div className="text-center pt-3 pb-5">
+                      <button
+                        type="submit"
+                        className="input-button btn btn-primary"
+                      >
+                        Login
+                      </button>
+                    </div>
                   </form>
                 )}
               </Formik>
@@ -88,7 +150,7 @@ const Login = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

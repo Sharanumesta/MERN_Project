@@ -1,32 +1,38 @@
-import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
-import jwt from 'jsonwebtoken';
-import axios from 'axios';
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import jwt from "jsonwebtoken";
+import axios from "axios";
 
 const Profile = () => {
   const navigate = useNavigate();
 
-  useEffect( () => {
+  useEffect(() => {
     const profileDetail = async () => {
-      try{
-        const token = localStorage.getItem('token');
-        if(token){
+      try {
+        const token = localStorage.getItem("token");
+        if (token) {
           const user = jwt.decode(token);
-
-          if(!user){
-            localStorage.removeItem('token');
-            navigate('/login');
-          }else{
+          if (!user) {
+            localStorage.removeItem("token");
+            navigate("/login");
+          } else {
             // Token is valid, make the authorized request
-            const response = await axios.get('http://localhost:8080/profile', {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            });
-            console.log(response.data);
+            try {
+              const response = await axios.get(
+                "http://localhost:8080/profile",
+                {
+                  headers: {
+                    Authorization : `Bearer ${token}`,
+                  },
+                }
+              );
+              console.log(response.data);
+            } catch (error) {
+              console.error("Error fetching data:", error);
+            }
           }
-        }else{
-          navigate('/login');
+        } else {
+          navigate("/login");
         }
       } catch (error) {
         console.log(error);
@@ -37,11 +43,9 @@ const Profile = () => {
 
   return (
     <>
-    <h1>
-      Hello Profile
-    </h1>
+      <h1>Hello Profile</h1>
     </>
-  )
-}
+  );
+};
 
-export default Profile
+export default Profile;

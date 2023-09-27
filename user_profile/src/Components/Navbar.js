@@ -14,6 +14,9 @@ const CustomNavbar = () => {
             <li class="nav-item">
               <Link to="/login" className="nav-link active ms-2 me-2 fw-bold"> Login </Link>
             </li>
+            <li class="nav-item">
+              <Link to="/logout" className="nav-link active ms-2 me-2 fw-bold"> Logout </Link>
+            </li>
         </ul>
       </div>
     </nav>

@@ -76,6 +76,7 @@ server.post('/login', (req, res, next) => {
 
     // If authentication is successful, manually log in the user
     req.login(user, (err) => {
+      // console.log(user.email)
       // Generate JWT
       const token = jwt.sign({ email: user.email }, 'mestashara');
       // Successful authentication, send response with JWT
@@ -85,20 +86,19 @@ server.post('/login', (req, res, next) => {
 });
 
 server.get('/profile', async (req, res) => {
-  const token = req.headers['Authorization'];
+  const token = req.headers.authorization?.split(' ')[1];
   try {
     const decode = jwt.verify(token, 'mestashara');
     const email = decode.email
-    const user = await User.findOne({ email: email });
-    console.log(user);
+    const query = { name:1, phone:1, email:1, _id:0 }
+    const user = await User.findOne({ email }, query);
     return res.json({ user });
   } catch (error) {
-    
+    console.error('JWT decoding error:', error);
   }
 });
 
-
-server.get('/', (req, res) => {
+server.get('/', (res) => {
   res.send('Server is running');
 });
 

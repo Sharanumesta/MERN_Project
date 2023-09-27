@@ -8,6 +8,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Registration = () => {
   const registrationSchema = yup.object().shape({
@@ -48,8 +49,14 @@ const Registration = () => {
         if (res.status === 400) {
           alert("User already exist please Login!");
         } else if (res.status === 200) {
-          alert("Registration successful");
-          navigate("/login");
+          Swal.fire({
+            title:'Registration successful',
+            icon:'success'
+          }).then((result) =>{
+            if(result.isConfirmed){
+              navigate("/login");
+            }
+          })
         } else {
           Promise.reject();
         }

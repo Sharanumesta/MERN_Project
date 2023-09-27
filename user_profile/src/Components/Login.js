@@ -5,6 +5,7 @@ import { Formik } from "formik";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const initialValues = {
@@ -35,9 +36,14 @@ const Login = () => {
       await axios.post("http://localhost:8080/login", values).then((res) => {
         const { message, token } = res.data;
         if (message === "Login successful") {
-          localStorage.setItem("token", token);
-          alert("Login Successful");
-          navigate("/profile");
+          Swal.fire({
+            title:'Login Successfull',
+            icon:'success'
+          }).then(()=>{
+
+            localStorage.setItem("token", token);
+            navigate("/profile");
+          })
         } else if (message === "Unauthorized") {
           setError("Enter correct email or password");
         }

@@ -8,6 +8,7 @@ const passportConfig = require('./passportConfig');
 const flash = require('express-flash');
 const expressSession = require('express-session');
 const jwt = require('jsonwebtoken');
+const transport = require('./mail');
 
 const port = 8080;
 const server = express();
@@ -76,7 +77,6 @@ server.post('/login', (req, res, next) => {
 
     // If authentication is successful, manually log in the user
     req.login(user, (err) => {
-      // console.log(user.email)
       // Generate JWT
       const token = jwt.sign({ email: user.email }, 'mestashara');
       // Successful authentication, send response with JWT
@@ -96,6 +96,30 @@ server.get('/profile', async (req, res) => {
   } catch (error) {
     console.error('JWT decoding error:', error);
   }
+});
+
+server.post('/mail',async (req, res) => {
+  const data = req.body;
+  try {
+    const mailData = {
+      from: 'sharanumesta1201@gmamil.com',
+      to: data.to,
+      subject: data.subject,
+      text: data.text
+    };
+
+    transport.sendMail(mailData,(error) => {
+      if(error){
+        return res.status(500).json({ error: 'Error sending email' });
+      } else {
+        return res.json({ message: 'Email sent successfully' });
+      }
+    })
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Server error' });
+  }
+
 });
 
 server.get('/', (res) => {

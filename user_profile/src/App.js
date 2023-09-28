@@ -6,6 +6,7 @@ import Profile from './Components/Profile';
 import Login from './Components/Login';
 import Logout from './Components/Logout';
 import CustomNavbar from './Components/Navbar';
+import Mail from './Components/Mail';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/profile' Component={Profile} />
           <Route path='/login' Component={Login} />
           <Route path='/logout' Component={Logout} />
+          <Route path='mail' Component={Mail} />
         </Routes>
       </Router>
     </>

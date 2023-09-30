@@ -17,4 +17,20 @@ const userSchema = mongoose.Schema({
 // Create the User model or collection
 const User = mongoose.model( 'User',userSchema );
 
-module.exports = User;
+// Create the User schema
+const otpSchema = mongoose.Schema({
+    email: String,
+    otp: Number,
+    createdAt: {
+        type: Date,
+        default: Date.now, // Set the default value to the current date and time
+      }
+},
+{
+    versionKey: false, // Disable the __v field
+});
+
+// Create the User model or collection
+const Otp = mongoose.model( 'Otp',otpSchema );
+
+module.exports = {User, Otp };

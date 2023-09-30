@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Formik } from "formik";
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Swal from "sweetalert2";
 
@@ -14,10 +14,7 @@ const Login = () => {
   };
 
   const loginSchema = yup.object().shape({
-    email: yup
-      .string()
-      .email()
-      .required("Enter your Email"),
+    email: yup.string().email().required("Enter your Email"),
     password: yup.string().required("Enter yor Password"),
   });
 
@@ -89,7 +86,7 @@ const Login = () => {
                     </div>
                     <div className="pb-3 px-5 row">
                       <input
-                        className="form-control"
+                        className="inputField"
                         type="email"
                         name="email"
                         autoComplete="off"
@@ -107,9 +104,10 @@ const Login = () => {
                         </div>
                       )}
                     </div>
-                    <div className="pb-3 px-5 row password-toggle-icon">
+                    {/* <div className="row"> */}
+                    <div className="pb-3 px-5 row position-relative">
                       <input
-                        className="form-control"
+                        className="inputField pr-5"
                         type={type}
                         name="password"
                         autoComplete="off"
@@ -118,19 +116,21 @@ const Login = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
+                      <div className="">
+                          <FontAwesomeIcon
+                            onClick={passwordToggle}
+                            icon={icon}
+                            className="togglePassword"
+                          />
+                      </div>
                       {errors.password && (
                         <div
-                          className="text-danger"
-                          style={{ fontSize: "0.75rem" }}
+                        className="text-danger"
+                        style={{ fontSize: "0.75rem" }}
                         >
                           {errors.password}
                         </div>
                       )}
-                      <FontAwesomeIcon
-                        onClick={passwordToggle}
-                        icon={icon}
-                        className="login_icon"
-                      />
                     </div>
                     {error && (
                       <div
@@ -140,13 +140,16 @@ const Login = () => {
                         {error}
                       </div>
                     )}
-                    <div className="text-center pt-3 pb-5">
+                    <div className="text-center pt-3 pb-4 ">
                       <button
                         type="submit"
                         className="input-button btn btn-primary"
                       >
                         Login
                       </button>
+                    </div>
+                    <div className="text-center  mb-5">
+                      <Link to='/forgot_password' className="text-decoration-none text-success"> forgot password?</Link>
                     </div>
                   </form>
                 )}

@@ -7,6 +7,7 @@ import Login from './Components/Login';
 import Logout from './Components/Logout';
 import CustomNavbar from './Components/Navbar';
 import Mail from './Components/Mail';
+import ForgotPassword from './Components/forgot_password/ForgotPassword';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
           <Route path='/profile' Component={Profile} />
           <Route path='/login' Component={Login} />
           <Route path='/logout' Component={Logout} />
-          <Route path='mail' Component={Mail} />
+          <Route path='/mail' Component={Mail} />
+          <Route path='/forgot_password' Component={ForgotPassword} />
         </Routes>
       </Router>
     </>

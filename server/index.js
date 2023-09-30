@@ -1,14 +1,15 @@
-const User = require('./db');
+const {User, Otp } = require('./db');
+const transport = require('./mail');
+const passportConfig = require('./passportConfig');
+const generateOTP =  require('./genarteOTP');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
-const passportConfig = require('./passportConfig');
 const flash = require('express-flash');
 const expressSession = require('express-session');
 const jwt = require('jsonwebtoken');
-const transport = require('./mail');
 
 const port = 8080;
 const server = express();
@@ -35,8 +36,7 @@ passportConfig(passport);
 server.post('/', async (req, res) => {
   
   try {
-    const data = req.body;
-    const email = data.email;
+    const email = req.body.email;
     const existingUser = await User.findOne({ email });
     
     if (existingUser) {
@@ -122,7 +122,60 @@ server.post('/mail',async (req, res) => {
 
 });
 
-server.get('/', (res) => {
+server.post('/forgot_password', async (req, res) => {
+
+  const email = req.body.email;
+  const user = await User.findOne({email});
+  
+  if(user){
+    const otp = generateOTP();
+    const mailData = {
+      from: 'sharanumesta1201@gmamil.com',
+      to: email,
+      subject: "Reset your password",
+      text: `Your one time password is ${otp} please do not share with others`
+    };
+
+    transport.sendMail(mailData, async (error) => {
+      if(error){
+        return res.status(500).json({ error: 'Error sending email' });
+      } else {
+        const storeOtp = new Otp({
+          email: email,
+          otp: otp,
+        });
+        
+        await storeOtp.save();
+        return res.json({ message: 'OTP sent successfully' });
+      }
+    });
+  }else{
+    return res.json({ message: 'User not found' });
+  }
+})
+
+server.post('/validat_otp', async (req, res) => {
+  try {
+    const email = req.body.email;
+    const otp = req.body.otp;
+    console.log(email,otp);
+
+    const query = {_id:0, otp:1}
+    const dbOtp = await Otp.findOne({email},query).sort({ createdAt: -1 });
+    console.log(dbOtp);
+
+    if (otp === dbOtp.otp) {
+      return res.json({ message: 'Otp successfully validated' });
+    } else {
+      console.log('Invalid OTP');
+      return res.status(400).json({ message: 'Invalid OTP' });
+    }
+  } catch (error) {
+    console.log(error)
+  }
+});
+
+server.get('/', (req, res) => {
   res.send('Server is running');
 });
 

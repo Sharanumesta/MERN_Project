@@ -11,18 +11,13 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Registration = () => {
+
   const registrationSchema = yup.object().shape({
     name: yup.string().min(3).max(20).required("Enter your name"),
     email: yup.string().email().required("Enter your email"),
-    phone: yup
-      .string()
-      .required()
-      .matches(/^\d{10}$/, "Phone number must be exactly 10 digits"),
+    phone: yup.string().required().matches(/^\d{10}$/, "Phone number must be exactly 10 digits"),
     password: yup.string().required("Enter your Password"),
-    confirm_password: yup
-      .string()
-      .required()
-      .oneOf([yup.ref("password"), null], "Password must match"),
+    confirm_password: yup.string().required().oneOf([yup.ref("password"), null], "Password must match"),
   });
 
   const initialValues = {
@@ -104,7 +99,7 @@ const Registration = () => {
                       </div>
                       <div className="pb-3 row">
                         <input
-                          className="form-control"
+                          className=" inputField"
                           type="text"
                           name="name"
                           autoComplete="off"
@@ -124,7 +119,7 @@ const Registration = () => {
                       </div>
                       <div className="pb-3 row">
                         <input
-                          className="form-control"
+                          className="inputField"
                           type="tel"
                           name="phone"
                           autoComplete="off"
@@ -144,7 +139,7 @@ const Registration = () => {
                       </div>
                       <div className="pb-3 row">
                         <input
-                          className="form-control"
+                          className="inputField"
                           type="email"
                           name="email"
                           autoComplete="off"
@@ -162,9 +157,9 @@ const Registration = () => {
                           </div>
                         )}
                       </div>
-                      <div className="pb-3 row password-toggle-container">
+                      <div className="pb-3 row position-relative password-toggle-container">
                         <input
-                          className="form-control password-input"
+                          className="inputField"
                           type={type}
                           name="password"
                           autoComplete="off"
@@ -173,11 +168,13 @@ const Registration = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <FontAwesomeIcon
-                          onClick={passwordTogle}
-                          icon={icon}
-                          className="eye-icon"
-                        />
+                        <div> 
+                          <FontAwesomeIcon
+                            onClick={passwordTogle}
+                            icon={icon}
+                            className="eye-icon"
+                          />
+                        </div>
                         {errors.password && (
                           <div
                             className="text-danger"
@@ -187,9 +184,9 @@ const Registration = () => {
                           </div>
                         )}
                       </div>
-                      <div className="pb-3 row password-toggle-container">
+                      <div className="pb-3 row position-relative password-toggle-container">
                         <input
-                          className="form-control password-input"
+                          className="inputField password-input"
                           type={type}
                           name="confirm_password"
                           autoComplete="off"
@@ -198,11 +195,13 @@ const Registration = () => {
                           onChange={handleChange}
                           onBlur={handleBlur}
                         />
-                        <FontAwesomeIcon
-                          onClick={passwordTogle}
-                          icon={icon}
-                          className="eye-icon"
-                        />
+                        <div>
+                          <FontAwesomeIcon
+                            onClick={passwordTogle}
+                            icon={icon}
+                            className="eye-icon"
+                          />
+                        </div>
                         {errors.confirm_password && (
                           <div
                             className="text-danger"

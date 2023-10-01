@@ -12,7 +12,7 @@ const CustomNavbar = () => {
                 <Link to="/" class="nav-link active ms-2 me-3 fw-bold text-success">Registration</Link>
             </li>
             <li class="nav-item">
-              <Link to="/login" className="nav-link active ms-3 me-3 fw-bold text-success"> Login </Link>
+              <Link to="/" className="nav-link active ms-3 me-3 fw-bold text-success"> Login </Link>
             </li>
             <li class="nav-item">
               <Link to="/logout" className="nav-link active ms-3 me-3 fw-bold text-success"> Logout </Link>

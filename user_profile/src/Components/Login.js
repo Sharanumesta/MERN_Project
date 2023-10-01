@@ -30,19 +30,18 @@ const Login = () => {
 
   const handleSubmit = async (values) => {
     try {
-      await axios.post("http://localhost:8080/login", values).then((res) => {
+      await axios.post("http://localhost:8080/", values).then((res) => {
         const { message, token } = res.data;
         if (message === "Login successful") {
           Swal.fire({
             title:'Login Successfull',
             icon:'success'
           }).then(()=>{
-
             localStorage.setItem("token", token);
             navigate("/profile");
           })
-        } else if (message === "Unauthorized") {
-          setError("Enter correct email or password");
+        } else{
+          setError("Incorrect email or password");
         }
       });
     } catch (error) {
@@ -81,7 +80,7 @@ const Login = () => {
                   handleBlur,
                 }) => (
                   <form className="mx-auto" onSubmit={handleSubmit}>
-                    <div className="h3 text-uppercase text-success py-4 text-center">
+                    <div className="h3 text-uppercase text-success py-5 text-center">
                       Welcome Back
                     </div>
                     <div className="pb-3 px-5 row">
@@ -148,8 +147,11 @@ const Login = () => {
                         Login
                       </button>
                     </div>
-                    <div className="text-center  mb-5">
+                    <div className="text-center mb-2">
                       <Link to='/forgot_password' className="text-decoration-none text-success"> forgot password?</Link>
+                    </div>
+                    <div className="text-center">
+                      <p>don't have an account? <Link to='/registration' className="text-decoration-none text-success">Register</Link></p>
                     </div>
                   </form>
                 )}

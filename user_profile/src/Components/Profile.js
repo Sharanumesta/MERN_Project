@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import Navbar from './Navbar';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -18,7 +19,7 @@ const Profile = () => {
           const user = jwt.decode(token);
           if (!user) {
             localStorage.removeItem("token");
-            navigate("/login");
+            navigate("/");
           } else {
             // Token is valid, make the authorized request
             try {
@@ -39,7 +40,7 @@ const Profile = () => {
             }
           }
         } else {
-          navigate("/login");
+          navigate("/");
         }
       } catch (error) {
         console.log(error);
@@ -50,6 +51,7 @@ const Profile = () => {
 
   return (
     <>
+      <Navbar />
       <h1>Profile</h1>
         <ul>
           <li>

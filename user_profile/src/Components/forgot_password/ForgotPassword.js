@@ -45,7 +45,7 @@ const ForgotPassword = () => {
               }
             })
     } catch (error) {
-        
+      
     }
   }
 

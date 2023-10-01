@@ -3,28 +3,42 @@ import * as yup from "yup";
 import { Formik } from "formik";
 import axios from 'axios';
 import UpdatePassword from './UpdatePassword';
+import Swal from 'sweetalert2';
 
 const ValidateOtp = (props) => {
+  const email = props.data;
   
-  const [passwordUpdate, setPasswordUpdate] = useState(true);
+  const [passwordUpdate, setPasswordUpdate] = useState(false);
   const initialValues = {
     otp: ''
   }
 
   const otpSchema = yup.object().shape({
-    otp: yup.number().required("Enter the otp")
+    otp: yup.number()
+        .required("Enter the otp")
+        .test(
+            "is-six-digits",
+            "OTP must be exactly 6 digits",
+            (value) => (value ? /^[0-9]{6}$/.test(value) : false)
+        ),
   });
 
   const handleSubmit = async (values) => {
     try {
         const dataToSend = {
             ...values,
-            email: props.data
+            email: email
         }
         axios.post("http://localhost:8080/validat_otp", dataToSend)
         .then((res) => {
             if(res.data.message === 'Otp successfully validated'){
                 setPasswordUpdate(true);
+            }else if(res.data.message === 'Invalid OTP'){
+                Swal.fire({
+                    icon: 'error',
+                    title: "Incorrect OTP",
+                    text: 'Check your email and enter correct OTP'
+                });
             }
         });
     } catch (error) {
@@ -36,7 +50,7 @@ const ValidateOtp = (props) => {
     <>
         {
             passwordUpdate ? (
-                <UpdatePassword />
+                <UpdatePassword data={email} />
             ) : (
                 <div className="background">
                     <div className="container d-flex justify-content-center align-items-center vh-100">

@@ -33,4 +33,4 @@ const otpSchema = mongoose.Schema({
 // Create the User model or collection
 const Otp = mongoose.model( 'Otp',otpSchema );
 
-module.exports = {User, Otp };
+module.exports = { User, Otp };

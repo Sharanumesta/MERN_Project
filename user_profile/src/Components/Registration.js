@@ -8,6 +8,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const Registration = () => {
@@ -33,13 +34,13 @@ const Registration = () => {
 
   useEffect(()=>{
     if(token){
-      navigate('/profile');
+      navigate('/');
     }
   },[token,navigate])
 
   const handleSubmit = async (values) => {
     try {
-      await axios.post("http://localhost:8080/", values)
+      await axios.post("http://localhost:8080/registration", values)
       .then((res) => {
         if (res.status === 400) {
           alert("User already exist please Login!");
@@ -49,7 +50,7 @@ const Registration = () => {
             icon:'success'
           }).then((result) =>{
             if(result.isConfirmed){
-              navigate("/login");
+              navigate("/");
             }
           })
         } else {
@@ -211,13 +212,16 @@ const Registration = () => {
                           </div>
                         )}
                       </div>
-                      <div className="text-center pt-3 pb-5">
+                      <div className="text-center pt-3 pb-3">
                         <button
                           type="submit"
                           className="input-button btn btn-primary"
                         >
                           Register
                         </button>
+                      </div>
+                        <div className="text-center">
+                        <p>already have an account? <Link to='/' className="text-decoration-none text-success">Login</Link></p>
                       </div>
                     </form>
                   )}

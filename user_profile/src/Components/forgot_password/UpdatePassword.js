@@ -1,21 +1,48 @@
 import React from 'react';
 import * as yup from "yup";
 import { Formik } from "formik";
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
-function UpdatePassword() {
-
+const UpdatePassword = (props) => {
+  
+  const navigat = useNavigate();
+  const email = props.data;
   const initialValues = {
     password: '',
     confirm_new_password: ''
   };
 
   const passwordSchema = yup.object().shape({
-    password: yup.string().email().required("Enter new password"),
+    password: yup.string().required("Enter new password"),
     confirm_new_password: yup.string().required("Enter new password again").oneOf([yup.ref("password"), null], "Password must match"),
   });
 
   const handleSubmit = async (values) =>{
-
+    const dataToSend = {
+      ...values,
+      email: email
+    }
+    console.log(dataToSend);
+    try {
+      axios.post('http://localhost:8080/update_password', dataToSend)
+      .then((res) => {
+        if(res.data.message === 'Password updated successfully'){
+          Swal.fire({
+            icon: 'success',
+            title: 'Password changed successfully'
+          })
+          .then((result) => {
+            if(result.isConfirmed){
+              navigat('/login');
+            }
+          })
+        }
+      })
+    } catch (error) {
+      
+    }
   }
 
   return (

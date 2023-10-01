@@ -1,4 +1,4 @@
-const {User, Otp } = require('./db');
+const { User, Otp } = require('./db');
 const transport = require('./mail');
 const passportConfig = require('./passportConfig');
 const generateOTP =  require('./genarteOTP');
@@ -33,7 +33,7 @@ server.use(passport.session());
 passportConfig(passport); 
 
 // CRUD - Create
-server.post('/', async (req, res) => {
+server.post('/registration', async (req, res) => {
   
   try {
     const email = req.body.email;
@@ -63,7 +63,7 @@ server.post('/', async (req, res) => {
 });
 
 // Login route
-server.post('/login', (req, res, next) => {
+server.post('/', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (err) {
       // Handle any errors that occur during authentication
@@ -158,20 +158,39 @@ server.post('/validat_otp', async (req, res) => {
   try {
     const email = req.body.email;
     const otp = req.body.otp;
-    console.log(email,otp);
 
     const query = {_id:0, otp:1}
     const dbOtp = await Otp.findOne({email},query).sort({ createdAt: -1 });
-    console.log(dbOtp);
 
     if (otp === dbOtp.otp) {
       return res.json({ message: 'Otp successfully validated' });
     } else {
-      console.log('Invalid OTP');
-      return res.status(400).json({ message: 'Invalid OTP' });
+      return res.json({ message: 'Invalid OTP' });
     }
   } catch (error) {
     console.log(error)
+  }
+});
+
+server.post('/update_password', async (req, res) => {
+  try {
+    const email = req.body.email;
+    const newPassword = req.body.password;
+
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(newPassword, salt);
+
+    const updatePassword = await User.updateOne(
+      { email: email }, 
+      { $set: { password: hashPassword }}
+    );
+
+    if(updatePassword){
+      console.log('successfully')
+      return res.json({ message: 'Password updated successfully'})
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

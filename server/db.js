@@ -11,7 +11,14 @@ const userSchema = mongoose.Schema({
     name : String,
     phone : Number,
     email : String,
-    password : String
+    password : String,
+    status : {
+        type : Number,
+        default : 0
+    }
+},
+{
+    versionKey: false, // Disable the __v field
 })
 
 // Create the User model or collection
@@ -19,6 +26,7 @@ const User = mongoose.model( 'User',userSchema );
 
 // Create the User schema
 const otpSchema = mongoose.Schema({
+    name : String,
     email: String,
     otp: Number,
     createdAt: {

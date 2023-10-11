@@ -4,10 +4,13 @@ import { Formik } from "formik";
 import axios from 'axios';
 import UpdatePassword from './UpdatePassword';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const ValidateOtp = (props) => {
   const email = props.data;
-  
+  const message = email.message;
+  const navigat = useNavigate();
+
   const [passwordUpdate, setPasswordUpdate] = useState(false);
   const initialValues = {
     otp: ''
@@ -27,12 +30,25 @@ const ValidateOtp = (props) => {
     try {
         const dataToSend = {
             ...values,
-            email: email
+            email: email,
         }
         axios.post("http://localhost:8080/validat_otp", dataToSend)
         .then((res) => {
             if(res.data.message === 'Otp successfully validated'){
-                setPasswordUpdate(true);
+                if(res.data.otpName){
+                    Swal.fire({
+                        icon:"success",
+                        title: "Succesfull",
+                        text: 'Email verificartion successfull'
+                    })
+                    .then((result) =>{
+                        if(result.isConfirmed){
+                            navigat('/')
+                        }
+                    });
+                }else{
+                    setPasswordUpdate(true);
+                }
             }else if(res.data.message === 'Invalid OTP'){
                 Swal.fire({
                     icon: 'error',
@@ -72,7 +88,7 @@ const ValidateOtp = (props) => {
                             }) => (
                                 <form className="mx-5" onSubmit={handleSubmit}>
                                 <div className="h6 text-uppercase text-success py-4 text-center">
-                                    enter the otp send to yor email
+                                    { message ? ( message ) : ( "enter the otp send to yor email" ) }
                                 </div>
                                 <div className="pb-3 row position-relative password-toggle-container">
                                     <input

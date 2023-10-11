@@ -35,7 +35,7 @@ const UpdatePassword = (props) => {
           })
           .then((result) => {
             if(result.isConfirmed){
-              navigat('/login');
+              navigat('/');
             }
           })
         }

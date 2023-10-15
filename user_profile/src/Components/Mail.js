@@ -3,6 +3,7 @@ import * as yup from "yup";
 import { Formik } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import Navbar from './Navbar';
 
 function Mail() {
     const initialValues = {
@@ -41,7 +42,8 @@ function Mail() {
       }
   return (
     <>
-     <div className="background">
+      <Navbar />
+      <div className="background">
         <div className="container d-flex justify-content-center align-items-center vh-100">
           <div className="row w-75">
             <div className="col-md-6 mx-auto border-0 shadow-lg bg-white rounded-3">

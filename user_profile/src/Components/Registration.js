@@ -40,7 +40,7 @@ const Registration = () => {
 
   useEffect(()=>{
     if(token){
-      navigate('/');
+      navigate('/login');
     }
   },[token])
 
@@ -56,7 +56,7 @@ const Registration = () => {
             text:"Please login"
           }).then((result) =>{
             if(result.isConfirmed){
-              navigate("/");
+              navigate("/login");
             }
           })
         }else if (res.data.message === "OTP sent successfully"){
@@ -67,7 +67,7 @@ const Registration = () => {
             icon:'success'
           }).then((result) =>{
             if(result.isConfirmed){
-              navigate("/");
+              navigate("/login");
             }
           })
         } else {
@@ -242,7 +242,7 @@ const Registration = () => {
                             </button>
                           </div>
                             <div className="text-center">
-                            <p>already have an account? <Link to='/' className="text-decoration-none text-success">Login</Link></p>
+                            <p>already have an account? <Link to='/login' className="text-decoration-none text-success">Login</Link></p>
                           </div>
                         </form>
                       )}

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.css';
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import Navbar from './Navbar';
@@ -19,7 +20,7 @@ const Profile = () => {
           const user = jwt.decode(token);
           if (!user) {
             localStorage.removeItem("token");
-            navigate("/");
+            navigate("/login");
           } else {
             // Token is valid, make the authorized request
             try {
@@ -40,7 +41,7 @@ const Profile = () => {
             }
           }
         } else {
-          navigate("/");
+          navigate("/login");
         }
       } catch (error) {
         console.log(error);
@@ -52,20 +53,20 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <h1>Profile</h1>
-        <ul>
-          <li>
-            <strong>Name:</strong> {name}
-          </li>
-          <li>
-            <strong>Email:</strong> {email}
-          </li>
-          <li>
-            <strong>Phone:</strong> {phone}
-          </li>
-        </ul>
-          <Link to="/mail" className="btn input-button btn-outline-primary text-center"> Send mail </Link>
-
+      <div className='vh-100 d-flex justify-content-center align-items-center'>
+          <ul>
+            <li>
+              <strong>Name:</strong> { name }
+            </li>
+            <li>
+              <strong>Email:</strong> { email }
+            </li>
+            <li>
+              <strong>Phone:</strong> { phone }
+            </li>
+          </ul>
+      </div>
+        {/* <Link to="/mail" className="btn input-button btn-outline-primary text-center"> Send mail </Link> */}
     </>
   );
 };

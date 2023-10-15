@@ -7,13 +7,15 @@ import Login from './Components/Login';
 import Logout from './Components/Logout';
 import Mail from './Components/Mail';
 import ForgotPassword from './Components/forgot_password/ForgotPassword';
+import Home from './Components/Home';
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path='/' Component={Login} />
+          <Route path='/' Component={Home} />
+          <Route path='/login' Component={Login} />
           <Route path='/logout' Component={Logout} />
           <Route path='/registration' Component={Registration} />
           <Route path='/profile' Component={Profile} />

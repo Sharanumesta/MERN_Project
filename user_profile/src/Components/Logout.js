@@ -15,10 +15,10 @@ const Logout = () =>  {
         Swal.fire('Logged Out','You have been logged out','success')
         .then(()=>{
             localStorage.removeItem('token');
-            navigate('/');
+            navigate('/login');
         });
         }if(result.isDismissed){
-            navigate('/profile');
+            navigate('/');
         }
     });
 }

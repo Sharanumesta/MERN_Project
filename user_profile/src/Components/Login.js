@@ -24,13 +24,13 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      navigate("/profile");
+      navigate("/");
     }
   }, [token, navigate]);
 
   const handleSubmit = async (values) => {
     try {
-      await axios.post("http://localhost:8080/", values).then((res) => {
+      await axios.post("http://localhost:8080/login", values).then((res) => {
         const { message, token } = res.data;
         if (message === "Login successful") {
           Swal.fire({
@@ -38,7 +38,7 @@ const Login = () => {
             icon:'success'
           }).then(()=>{
             localStorage.setItem("token", token);
-            navigate("/profile");
+            navigate("/");
           })
         } else{
           setError("Incorrect email or password");

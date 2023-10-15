@@ -90,7 +90,7 @@ server.post('/registration', async (req, res) => {
 });
 
 // Login route
-server.post('/', (req, res, next) => {
+server.post('/login', (req, res, next) => {
   passport.authenticate('local', (err, user) => {
     if (err) {
       // Handle any errors that occur during authentication
@@ -215,7 +215,6 @@ server.post('/update_password', async (req, res) => {
     );
 
     if(updatePassword){
-      console.log('successfully')
       return res.json({ message: 'Password updated successfully'})
     }
   } catch (error) {

@@ -10,8 +10,8 @@ const Home = () => {
       <Navbar />
       <div className='container'>
         <div className='row h-100 my-5'>
-          <div className='col headline d-flex flex-column justify-content-center align-items-center headfont'>
-            <h1>Welcome to TechSolutions</h1>
+          <div className='col  d-flex flex-column justify-content-center align-items-center headfont'>
+            <p className='headline'>Welcome to TechSolutions</p>
             <p>Your Trusted Partner for Technology Consulting</p>
           </div>
           <div className='col d-flex flex-column justify-content-center align-items-center'>

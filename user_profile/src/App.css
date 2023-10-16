@@ -13,10 +13,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .inputField {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .togglePassword {
   position: absolute;
@@ -28,6 +28,15 @@ input[type="number"]::-webkit-outer-spin-button {
   cursor: pointer;
 }
 
+.text-shadow{
+  text-shadow: 2px 2px 4px rgba(16, 28, 139, 0.5);
+  font-family: 'Times New Roman';
+}
+
+.headline{
+  font-size: 3rem;
+}
+/* navbar starts*/
 ul {
   list-style: none;
 }
@@ -39,7 +48,7 @@ ul {
   display: grid;
   grid-template-columns: 6rem 2fr 2fr 6rem;
   box-shadow: rgba(34, 34, 230, 0.25) 0px 50px 100px -20px,
-    rgba(56, 36, 230, 0.3) 0px 30px 60px -30px;
+  rgba(56, 36, 230, 0.3) 0px 30px 60px -30px;
 }
 
 .logo{
@@ -53,7 +62,7 @@ ul {
   font-size: 1.25rem;
   font-weight: 600;
   text-transform: uppercase;
-  background: -webkit-linear-gradient(#271db1, rgb(47, 44, 209)  );
+  background: -webkit-linear-gradient(rgb(39, 29, 177), rgb(47, 44, 209)  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -70,16 +79,24 @@ ul {
   height: 6rem;
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr repeat(4,1fr);
+  grid-template-columns: 1fr repeat(5,1fr);
   font-weight:700;
 }
 
 .nav-content ul li{
   text-align: right;
+  transition: transform 0.5s;
+}
+
+.nav-content ul li:hover{
+  transform: scale(1.05);
+  text-decoration: underline;
+  text-decoration-color: #113baf62;
+  text-decoration-thickness: 3px;
 }
 
 .nav-content ul li:first-child{
-  grid-column: 2/3;
+  grid-column: 3/4;
 }
 
 .nav-content ul li a {
@@ -88,17 +105,59 @@ ul {
   color: #1a49ca;
 }
 
+/* navbar ends*/
+
+/* services start */
 .image-container {
   width: 380px; 
   height: 350px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
-.text-shadow{
-  text-shadow: 2px 2px 4px rgba(16, 28, 139, 0.5);
-  font-family: 'Times New Roman';
+.img3 {
+  transition: transform 0.5s;
+}
+
+.img3:hover {
+  transform: translate(18px);
+}
+
+.img {
+  transition: transform 0.5s;
+}
+
+.img:hover {
+  transform: scale(1.075);
 }
 
 .headfont{
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
+
+/* services ends */
+
+
+/* WhyChoosUs starts */
+
+.WhyChoosUs{
+  /* height: 300px; */
+  background-color: #7cb9e859;
+  /* border: 2px solid rgba(28, 57, 151, 0.123); */
+  border-radius: 20px;
+}
+
+.WhyChoosUs-head{
+  color:rgb(0, 0, 0);
+  text-shadow: 2px 2px 2px rgb(207, 169, 169);
+  font-weight:bolder;
+  font-size: 2rem;
+}
+
+.WhyChoosUs img{
+  transition: transform 0.5s;
+}
+
+.WhyChoosUs img:hover{
+  transform: translate(15px);
+}
+/* WhyChoosUs ends */

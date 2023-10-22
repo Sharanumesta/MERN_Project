@@ -50,9 +50,6 @@ const Servises = () => {
                 </div>
             </div>
         </div>
-        <div className="">
-            <WhyChooseUs />
-        </div>
     </>
   )
 }

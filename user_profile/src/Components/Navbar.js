@@ -8,10 +8,10 @@ const CustomNavbar = () => {
       <>
         <nav className='nav-main'>
           <div className='logo'>
-            <Link className='text-decoration' to="/">
+            <Link className='text-decoration-none' to="/">
               <h2>
-                <span>S</span>haranu
-                <span>M</span>esta
+                <span>T</span>ech
+                <span>s</span>olution
               </h2>
             </Link>
           </div>

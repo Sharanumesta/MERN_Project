@@ -161,3 +161,20 @@ ul {
   transform: translate(15px);
 }
 /* WhyChoosUs ends */
+
+/* footer starts */
+
+.footer{
+  width: 100%;
+  height: 500px;
+  display: grid;
+  /* grid-template-columns: 1fr repeat(1fr); */
+  background-color: hsl(205, 33%, 7%);
+  font-size:larger;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.footer-logo{
+  
+}
+/* footer ends */

@@ -3,6 +3,7 @@ import img7 from '../assets/img7.png'
 import img8 from '../assets/img8.png'
 import img9 from '../assets/img9.png'
 import img10 from '../assets/img10.png'
+import Footer from './Footer';
 
 
 const WhyChooseUs = () => {

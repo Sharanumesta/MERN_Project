@@ -53,20 +53,47 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <div className='vh-100 d-flex justify-content-center align-items-center'>
-          <ul>
-            <li>
-              <strong>Name:</strong> { name }
-            </li>
-            <li>
-              <strong>Email:</strong> { email }
-            </li>
-            <li>
-              <strong>Phone:</strong> { phone }
-            </li>
-          </ul>
+      <div className="container d-flex justify-content-center align-item-center">
+        <div className='profile'>
+          <div className="row">
+            <ul className="col">
+              <li className="row">
+                <div className="col-3 text-end">
+                  Name: 
+                </div>
+                <div className="col-9">
+                  { name }          
+                </div>
+              </li>
+              <li className="row">
+                <div className="col-3 text-end">
+                  Email: 
+                </div>
+                <div className="col-9">
+                  { email }           
+                </div>
+              </li>
+              <li className="row">
+                <div className="col-3 text-end">
+                  Phone:
+                </div>
+                <div className="col-9">
+                  { phone }           
+                </div>
+              </li>
+              <li className="row mt-5">
+                <div className="col-5 btn btn-outline-primary">
+                  <Link to="/edit-profile" className="text-decoration-none text-dark fw-bolder"> Edit profile </Link>
+                </div>
+                <div className="col-2"></div>
+                <div className="col-5 btn btn-outline-danger">
+                  <Link to="/logout" className="text-decoration-none text-dark fw-bolder"> Logout </Link>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-        {/* <Link to="/mail" className="btn input-button btn-outline-primary text-center"> Send mail </Link> */}
     </>
   );
 };

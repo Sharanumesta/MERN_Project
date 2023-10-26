@@ -1,22 +1,16 @@
 import React from 'react';
 import '../App.css';
-import Navbar from './Navbar';
+import { motion } from 'framer-motion/dist/framer-motion';
 import img3 from '../assets/img3.png';
+import Navbar from './Navbar';
 import Servises from './Services';
-import { motion } from 'framer-motion/dist/framer-motion'
 import WhyChooseUs from './WhyChooseUs';
 import Footer from './Footer';
 
 const Home = () => {
   return (
     <>
-      <motion.div
-        initial={{ y : '-100vh'}}
-        animate={{ y:0 }}
-        transition={{ duration:1 }}
-      >
-        <Navbar />
-      </motion.div>
+      <Navbar />
       <div className='container'>
         <div className='row h-100 my-5'>
           <div className='col-6 d-flex flex-column justify-content-center align-items-center headfont'>

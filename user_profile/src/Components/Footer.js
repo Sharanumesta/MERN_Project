@@ -13,7 +13,7 @@ const Footer = () => {
                   <span className='fs-1'>T</span>ech
                   <span className='fs-1'>s</span>olution
                 </h2>
-                <p className='pt-3 px-3 text-secondary'>TechSolutions is a tech solutions company committed to providing innovative, secure, and reliable tech services. Our mission is to empower businesses to thrive in the digital world.</p>
+                <p className='pt-3 px-3 text-secondary'>TechSolution is a tech solutions company committed to providing innovative, secure, and reliable tech services. Our mission is to empower businesses to thrive in the digital world.</p>
               </div>
             </div>
             <div className="col text-light text-center ">

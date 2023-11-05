@@ -42,9 +42,8 @@ function Mail() {
       }
   return (
     <>
-      <Navbar />
-      <div className="background">
-        <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="background container" id='mail'>
+        <div className=" d-flex justify-content-center align-items-center m-5">
           <div className="row w-75">
             <div className="col-md-6 mx-auto border-0 shadow-lg bg-white rounded-3">
               <Formik

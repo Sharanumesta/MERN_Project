@@ -8,7 +8,7 @@ import WhyChooseUs from './WhyChooseUs';
 const Servises = () => {
   return (
     <>
-        <div className="container mb-5 p-5">
+        <div className="container mb-5 p-5" id='services'>
             <div className="d-flex justify-content-center align-items-center">
                 <div className="row mb-5">
                     <h2 className='fw-medium text-shadow mb-4'>Our Tech Services</h2>

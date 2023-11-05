@@ -103,7 +103,6 @@ const Login = () => {
                         </div>
                       )}
                     </div>
-                    {/* <div className="row"> */}
                     <div className="pb-3 px-5 row position-relative">
                       <input
                         className="inputField pr-5"
@@ -115,7 +114,7 @@ const Login = () => {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <div className="">
+                      <div>
                           <FontAwesomeIcon
                             onClick={passwordToggle}
                             icon={icon}

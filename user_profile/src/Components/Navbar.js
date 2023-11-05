@@ -10,19 +10,19 @@ const CustomNavbar = () => {
         <Headroom>
           <nav className='nav-main'>
             <div className='logo'>
-              <Link className='text-decoration-none' to="/">
+              <a className='text-decoration-none' href='#hero'>
                 <h2>
                   <span>T</span>ech
                   <span>s</span>olution
                 </h2>
-              </Link>
+              </a>
             </div>
             <div className='nav-content'>
               <ul>
-                <li><Link to="/"> home </Link></li>
-                <li><Link to="/mail"> Mail </Link></li>
+                <li><a href='./#hero' > home </a></li>
+                <li><a href='./#mail'> Mail </a></li>
+                <li><a href='./#services'> Services </a></li>
                 <li><Link to="/profile"> profile </Link></li>
-                <li><Link to="/logout"> Logout </Link></li>
               </ul>
             </div>
           </nav>

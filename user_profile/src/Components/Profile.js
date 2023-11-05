@@ -81,12 +81,8 @@ const Profile = () => {
                   { phone }           
                 </div>
               </li>
-              <li className="row mt-5">
-                <div className="col-5 btn btn-outline-primary">
-                  <Link to="/edit-profile" className="text-decoration-none text-dark fw-bolder"> Edit profile </Link>
-                </div>
-                <div className="col-2"></div>
-                <div className="col-5 btn btn-outline-danger">
+              <li className="row mt-4 text-end d-flex justify-content-center">
+                <div className="col-4 btn btn-outline-danger">
                   <Link to="/logout" className="text-decoration-none text-dark fw-bolder"> Logout </Link>
                 </div>
               </li>

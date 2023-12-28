@@ -3,7 +3,6 @@ import * as yup from "yup";
 import { Formik } from 'formik';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import Navbar from './Navbar';
 
 function Mail() {
     const initialValues = {

@@ -30,9 +30,7 @@ const ForgotPassword = () => {
                   'User not found',
                   'Please check your email',
                   'error'
-                ).then(() => {
-                  window.location.reload();
-                })
+                )
               }else if (res.data.message === 'OTP sent successfully'){
                 Swal.fire(
                   'OTP sent',

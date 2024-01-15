@@ -22,6 +22,7 @@ function Mail() {
             await axios.post('http://localhost:8080/mail',values)
                 .then((res) =>{
                     const response = res.data.message;
+                    console.log(response);
                     if(response === 'Email sent successfully'){
                         Swal.fire({
                             icon: 'success',

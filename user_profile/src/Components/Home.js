@@ -21,8 +21,13 @@ const Home = () => {
                 animate={{ x: 0 }}
                 transition={{ duration: 1, ease: "easeInOut" }}
               >
-                <p className='headline'>Welcome to TechSolutions</p>
-                <p className='text-center'>Your Trusted Partner for Technology Consulting</p>
+                <div className="row">
+                  <div className="col-3"></div>
+                  <div className="col-8">
+                    <p className='headline text-start'>Welcome to TechSolutions</p>
+                    <p className='text-start'>Your Trusted Partner for Technology Consulting</p>
+                  </div>
+                </div>
               </motion.div>
             </div>
             <div className='col-6 d-flex flex-column justify-content-center align-items-center'>

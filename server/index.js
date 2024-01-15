@@ -137,6 +137,7 @@ server.post('/mail',async (req, res) => {
 
     transport.sendMail(mailData,(error) => {
       if(error){
+        console.log(error);
         return res.status(500).json({ error: 'Error sending email' });
       } else {
         return res.json({ message: 'Email sent successfully' });
@@ -165,17 +166,18 @@ server.post('/forgot_password', async (req, res) => {
     };
 
     transport.sendMail(mailData, async (error) => {
-      // if (error) {
-      //   return res.status(500).json({ error: "Error sending email" });
-      // } 
-      // else {/
+      if (error) {
+        console.log(error)
+        return res.status(500).json({ error: "Error sending email" });
+      } 
+      else {
         const storeOtp = new Otp({
           email: email,
           otp: otp,
         });
         await storeOtp.save();
         return res.json({ message: "OTP sent successfully" });
-      // }
+      }
     });
   }else{
     return res.json({ message: 'User not found' });

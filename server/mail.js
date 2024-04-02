@@ -4,7 +4,7 @@ const transport = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'sharanumesta1201@gmail.com',
-        pass: 'pqqt rlwy bpgm fjhz'
+        pass: 'ussh tier sfbe nnys'
     }
 })
 
